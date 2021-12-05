@@ -6,9 +6,9 @@ To try out the solutions clone the repo and run `cargo run` from the repository 
 
 ## Status
 
-- [ ] Day 1
+- [x] Day 1
     - [x] Part 1
-    - [ ] Part 2
+    - [x] Part 2
 - [ ] Day 2
     - [ ] Part 1
     - [ ] Part 2
