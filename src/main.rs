@@ -85,6 +85,11 @@ fn day2() {
     }
 
     println!("day 2 part 1 answer: {}", horizontal_position as i32 * vertical_position);
+
+    horizontal_position = 0;
+    vertical_position = 0;
+
+    let mut aim: i32 = 0;
 }
 
 fn main() {
