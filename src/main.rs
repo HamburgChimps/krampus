@@ -1,4 +1,10 @@
-use std::fs;
+use std::{fs, os::unix::prelude::OsStrExt};
+
+fn main() {
+    day1();
+    day2();
+    day3();
+}
 
 fn day1() {
     let input = fs::read_to_string("input/day1.txt").unwrap();
@@ -121,7 +127,13 @@ fn day2() {
     );
 }
 
-fn main() {
-    day1();
-    day2();
+fn day3() {
+    let input = fs::read_to_string("input/day3.txt").unwrap();
+    let diagnostics = input.lines();
+
+    for diagnostic in diagnostics {
+        // read each column of binary
+        // columns become rows
+        // maybe
+    }
 }
