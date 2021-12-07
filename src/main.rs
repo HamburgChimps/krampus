@@ -60,7 +60,7 @@ fn day1() {
 
 fn day2() {
     let input = fs::read_to_string("input/day2.txt").unwrap();
-    let instructions = input.lines();
+    let mut instructions = input.lines();
 
     let mut horizontal_position: u32 = 0;
     let mut vertical_position: i32 = 0;
@@ -84,12 +84,41 @@ fn day2() {
         }
     }
 
-    println!("day 2 part 1 answer: {}", horizontal_position as i32 * vertical_position);
+    println!(
+        "day 2 part 1 answer: {}",
+        horizontal_position as i32 * vertical_position
+    );
 
     horizontal_position = 0;
     vertical_position = 0;
 
     let mut aim: i32 = 0;
+    instructions = input.lines();
+
+    for i in instructions {
+        let inx_parts: Vec<_> = i.split(" ").collect();
+
+        let direction = inx_parts.first().unwrap();
+        let units: u32 = inx_parts.last().unwrap().parse().unwrap();
+
+        if let "forward" = *direction {
+            horizontal_position += units;
+            vertical_position += aim * units as i32;
+        }
+
+        if let "down" = *direction {
+            aim += units as i32;
+        }
+
+        if let "up" = *direction {
+            aim -= units as i32;
+        }
+    }
+
+    println!(
+        "day 2 part 2 answer: {}",
+        horizontal_position as i32 * vertical_position
+    );
 }
 
 fn main() {
