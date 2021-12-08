@@ -135,5 +135,6 @@ fn day3() {
         // read each column of binary
         // columns become rows
         // maybe
+        // array of arrays
     }
 }
