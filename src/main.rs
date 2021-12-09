@@ -1,4 +1,4 @@
-use std::{fs, os::unix::prelude::OsStrExt};
+use std::fs;
 
 fn main() {
     day1();
@@ -130,11 +130,11 @@ fn day2() {
 fn day3() {
     let input = fs::read_to_string("input/day3.txt").unwrap();
     let diagnostics = input.lines();
+    let mut diagnostices_serialized: Vec<Vec<u32>> = Vec::new();
 
     for diagnostic in diagnostics {
-        // read each column of binary
-        // columns become rows
-        // maybe
-        // array of arrays
+        let diagnostic_serialized: Vec<u32> =
+            diagnostic.chars().map(|c| c.to_digit(2).unwrap()).collect();
+        diagnostices_serialized.push(diagnostic_serialized);
     }
 }
