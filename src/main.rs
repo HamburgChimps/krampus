@@ -142,6 +142,7 @@ fn day3() {
         return d.into_iter().enumerate().map(|(i, b)| {
             acc[i] = (0, 0);
             if b == 1 {
+                // use fold...
                 acc[i][1] += 1;
             }
         }).collect();
