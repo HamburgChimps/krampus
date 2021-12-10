@@ -138,13 +138,29 @@ fn day3() {
         diagnostics_serialized.push(diagnostic_serialized);
     }
 
-    let counts = diagnostics_serialized.into_iter().reduce(|acc, d| {
-        return d.into_iter().enumerate().map(|(i, b)| {
-            acc[i] = (0, 0);
-            if b == 1 {
-                // use fold...
-                acc[i][1] += 1;
+    let counts: Vec<(u32, u32)> = diagnostics_serialized
+        .into_iter()
+        .map(|diagnostic_serialized| {
+            diagnostic_serialized
+                .into_iter()
+                .map(|bit| {
+                    if bit == 0 {
+                        return (1, 0);
+                    }
+
+                    return (0, 1);
+                })
+                .collect()
+        })
+        // perhaps try sum w/ type annotation here
+        .reduce(|mut acc: Vec<(u32, u32)>, counts| {
+            for (i, count) in counts.iter().enumerate() {
+                acc[i].0 += count.0;
+                acc[i].1 += count.1;
             }
-        }).collect();
-    });
+            return acc;
+        })
+        .unwrap();
+
+    println!("counts: {:?}", counts);
 }
