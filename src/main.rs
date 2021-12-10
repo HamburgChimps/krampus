@@ -138,6 +138,12 @@ fn day3() {
         diagnostics_serialized.push(diagnostic_serialized);
     }
 
-    // for tomorrow....
-    let counts = diagnostics_serialized.into_iter().reduce(|acc, d| d);
+    let counts = diagnostics_serialized.into_iter().reduce(|acc, d| {
+        return d.into_iter().enumerate().map(|(i, b)| {
+            acc[i] = (0, 0);
+            if b == 1 {
+                acc[i][1] += 1;
+            }
+        }).collect();
+    });
 }
