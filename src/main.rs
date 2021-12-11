@@ -172,9 +172,6 @@ fn day3() {
     )
     .unwrap();
 
-    let epsilon = !gamma & 1 << counts.len() as u32;
-    println!(
-        "day 3 part 1 answer: {} {}, {}\r\n{:b} {:b}",
-        gamma * epsilon, gamma, epsilon, gamma, epsilon
-    );
+    let epsilon = !gamma & ((1 << counts.len()) - 1);
+    println!("day 3 part 1 answer: {}", gamma * epsilon);
 }
