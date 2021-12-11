@@ -162,5 +162,19 @@ fn day3() {
         })
         .unwrap();
 
-    println!("counts: {:?}", counts);
+    let gamma = u32::from_str_radix(
+        counts
+            .iter()
+            .map(|counts| if counts.0 > counts.1 { '0' } else { '1' })
+            .collect::<String>()
+            .as_str(),
+        2,
+    )
+    .unwrap();
+
+    let epsilon = !gamma & 1 << counts.len() as u32;
+    println!(
+        "day 3 part 1 answer: {} {}, {}\r\n{:b} {:b}",
+        gamma * epsilon, gamma, epsilon, gamma, epsilon
+    );
 }
