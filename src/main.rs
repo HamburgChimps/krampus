@@ -165,7 +165,7 @@ fn day3() {
     let gamma = u32::from_str_radix(
         counts
             .iter()
-            .map(|counts| if counts.0 > counts.1 { '0' } else { '1' })
+            .map(|count| if count.0 > count.1 { '0' } else { '1' })
             .collect::<String>()
             .as_str(),
         2,
@@ -174,4 +174,6 @@ fn day3() {
     let epsilon = !gamma & ((1 << counts.len()) - 1);
 
     println!("day 3 part 1 answer: {}", gamma * epsilon);
+
+    for (i, count) in counts.iter().enumerate() {}
 }
