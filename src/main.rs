@@ -139,12 +139,12 @@ fn day3() {
     }
 
     let counts: Vec<(u32, u32)> = diagnostics_serialized
-        .into_iter()
+        .iter()
         .map(|diagnostic_serialized| {
             diagnostic_serialized
                 .into_iter()
                 .map(|bit| {
-                    if bit == 0 {
+                    if *bit == 0 {
                         return (1, 0);
                     }
 
@@ -174,4 +174,6 @@ fn day3() {
 
     let epsilon = !gamma & ((1 << counts.len()) - 1);
     println!("day 3 part 1 answer: {}", gamma * epsilon);
+
+    println!("diagnostics serialized: {:?}", diagnostics_serialized);
 }
