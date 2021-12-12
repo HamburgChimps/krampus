@@ -175,5 +175,76 @@ fn day3() {
 
     println!("day 3 part 1 answer: {}", gamma * epsilon);
 
-    for (i, count) in counts.iter().enumerate() {}
+    let mut oxygen_generator_rating_candidates = diagnostics_serialized.clone();
+    let mut co2_scrubber_rating_candidates = diagnostics_serialized.clone();
+
+    let oxygen_generator_rating: u32;
+    let co2_scrubber_rating: u32;
+
+    for (i, count) in counts.iter().enumerate() {
+        if oxygen_generator_rating_candidates.len() == 1 {
+            break;
+        }
+
+        if count.1 >= count.0 {
+            oxygen_generator_rating_candidates = oxygen_generator_rating_candidates
+                .into_iter()
+                .filter(|d| *d.get(i).unwrap() == 1)
+                .collect();
+            continue;
+        }
+
+        oxygen_generator_rating_candidates = oxygen_generator_rating_candidates
+            .into_iter()
+            .filter(|d| *d.get(i).unwrap() == 0)
+            .collect();
+    }
+
+    oxygen_generator_rating = u32::from_str_radix(
+        oxygen_generator_rating_candidates
+            .pop()
+            .unwrap()
+            .into_iter()
+            .map(|b| char::from_digit(b, 2).unwrap())
+            .collect::<String>()
+            .as_str(),
+        2,
+    )
+    .unwrap();
+
+    for (i, count) in counts.iter().enumerate() {
+        if co2_scrubber_rating_candidates.len() == 1 {
+            break;
+        }
+
+        if count.1 < count.0 {
+            co2_scrubber_rating_candidates = co2_scrubber_rating_candidates
+                .into_iter()
+                .filter(|d| *d.get(i).unwrap() == 1)
+                .collect();
+            continue;
+        }
+
+        co2_scrubber_rating_candidates = co2_scrubber_rating_candidates
+            .into_iter()
+            .filter(|d| *d.get(i).unwrap() == 0)
+            .collect();
+    }
+
+    co2_scrubber_rating = u32::from_str_radix(
+        co2_scrubber_rating_candidates
+            .pop()
+            .unwrap()
+            .into_iter()
+            .map(|b| char::from_digit(b, 2).unwrap())
+            .collect::<String>()
+            .as_str(),
+        2,
+    )
+    .unwrap();
+
+    println!(
+        "day 3 part 2 answer: {}",
+        oxygen_generator_rating * co2_scrubber_rating
+    );
 }
