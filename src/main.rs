@@ -139,12 +139,12 @@ fn day3() {
     }
 
     let counts: Vec<(u32, u32)> = diagnostics_serialized
-        .iter()
+        .into_iter()
         .map(|diagnostic_serialized| {
             diagnostic_serialized
                 .into_iter()
                 .map(|bit| {
-                    if *bit == 0 {
+                    if bit == 0 {
                         return (1, 0);
                     }
 
