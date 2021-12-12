@@ -12,9 +12,9 @@ To try out the solutions clone the repo and run `cargo run` from the repository 
 - [x] Day 2
     - [x] Part 1
     - [x] Part 2
-- [ ] Day 3
+- [x] Day 3
     - [x] Part 1
-    - [ ] Part 2
+    - [x] Part 2
 - [ ] Day 4
     - [ ] Part 1
     - [ ] Part 2

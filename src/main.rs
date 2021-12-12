@@ -181,22 +181,47 @@ fn day3() {
     let oxygen_generator_rating: u32;
     let co2_scrubber_rating: u32;
 
-    for (i, count) in counts.iter().enumerate() {
+    for pos in 0..oxygen_generator_rating_candidates.first().unwrap().len() {
         if oxygen_generator_rating_candidates.len() == 1 {
             break;
         }
 
+        let counts: Vec<(u32, u32)> = oxygen_generator_rating_candidates
+            .iter()
+            .map(|oxygen_generator_rating_candidate| {
+                oxygen_generator_rating_candidate
+                    .into_iter()
+                    .map(|bit| {
+                        if *bit == 0 {
+                            return (1, 0);
+                        }
+
+                        return (0, 1);
+                    })
+                    .collect()
+            })
+            .reduce(|mut acc: Vec<(u32, u32)>, counts| {
+                for (i, count) in counts.iter().enumerate() {
+                    acc[i].0 += count.0;
+                    acc[i].1 += count.1;
+                }
+                return acc;
+            })
+            .unwrap();
+
+        let count = counts.get(pos).unwrap();
+
         if count.1 >= count.0 {
             oxygen_generator_rating_candidates = oxygen_generator_rating_candidates
                 .into_iter()
-                .filter(|d| *d.get(i).unwrap() == 1)
+                .filter(|d| *d.get(pos).unwrap() == 1)
                 .collect();
             continue;
         }
 
         oxygen_generator_rating_candidates = oxygen_generator_rating_candidates
             .into_iter()
-            .filter(|d| *d.get(i).unwrap() == 0)
+            .filter(|d| *d.get(pos).unwrap() == 0)
             .collect();
     }
 
@@ -212,22 +237,47 @@ fn day3() {
     )
     .unwrap();
 
-    for (i, count) in counts.iter().enumerate() {
+    for pos in 0..co2_scrubber_rating_candidates.first().unwrap().len() {
         if co2_scrubber_rating_candidates.len() == 1 {
             break;
         }
 
+        let counts: Vec<(u32, u32)> = co2_scrubber_rating_candidates
+            .iter()
+            .map(|co2_scrubber_rating_candidate| {
+                co2_scrubber_rating_candidate
+                    .into_iter()
+                    .map(|bit| {
+                        if *bit == 0 {
+                            return (1, 0);
+                        }
+
+                        return (0, 1);
+                    })
+                    .collect()
+            })
+            .reduce(|mut acc: Vec<(u32, u32)>, counts| {
+                for (i, count) in counts.iter().enumerate() {
+                    acc[i].0 += count.0;
+                    acc[i].1 += count.1;
+                }
+                return acc;
+            })
+            .unwrap();
+
+        let count = counts.get(pos).unwrap();
+
         if count.1 < count.0 {
             co2_scrubber_rating_candidates = co2_scrubber_rating_candidates
                 .into_iter()
-                .filter(|d| *d.get(i).unwrap() == 1)
+                .filter(|d| *d.get(pos).unwrap() == 1)
                 .collect();
             continue;
         }
 
         co2_scrubber_rating_candidates = co2_scrubber_rating_candidates
             .into_iter()
-            .filter(|d| *d.get(i).unwrap() == 0)
+            .filter(|d| *d.get(pos).unwrap() == 0)
             .collect();
     }
 
