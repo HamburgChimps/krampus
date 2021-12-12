@@ -4,6 +4,7 @@ fn main() {
     day1();
     day2();
     day3();
+    day4();
 }
 
 fn day1() {
@@ -297,4 +298,8 @@ fn day3() {
         "day 3 part 2 answer: {}",
         oxygen_generator_rating * co2_scrubber_rating
     );
+}
+
+fn day4() {
+    let input = fs::read_to_string("input/day4.txt").unwrap();
 }
