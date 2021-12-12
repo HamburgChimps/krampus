@@ -171,9 +171,7 @@ fn day3() {
         2,
     )
     .unwrap();
-
     let epsilon = !gamma & ((1 << counts.len()) - 1);
-    println!("day 3 part 1 answer: {}", gamma * epsilon);
 
-    println!("diagnostics serialized: {:?}", diagnostics_serialized);
+    println!("day 3 part 1 answer: {}", gamma * epsilon);
 }
