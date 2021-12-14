@@ -302,4 +302,9 @@ fn day3() {
 
 fn day4() {
     let input = fs::read_to_string("input/day4.txt").unwrap();
+
+    let (draws, boards) = input.split_once("\n\n").unwrap();
+
+    println!("draws: {}", draws);
+    println!("boards: {}", boards);
 }
