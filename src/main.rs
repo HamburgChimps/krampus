@@ -303,8 +303,9 @@ fn day3() {
 fn day4() {
     let input = fs::read_to_string("input/day4.txt").unwrap();
 
-    let (draws, boards) = input.split_once("\n\n").unwrap();
+    let (draws_input, boards_input) = input.split_once("\n\n").unwrap();
 
-    println!("draws: {}", draws);
-    println!("boards: {}", boards);
+    let draws: Vec<u32> = draws_input.split(',').map(|d| d.parse().unwrap()).collect();
+
+    println!("draws: {:?}", draws);
 }
