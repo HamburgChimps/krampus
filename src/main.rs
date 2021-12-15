@@ -307,5 +307,17 @@ fn day4() {
 
     let draws: Vec<u32> = draws_input.split(',').map(|d| d.parse().unwrap()).collect();
 
-    println!("draws: {:?}", draws);
+    let boards: Vec<Vec<Vec<u32>>> = boards_input
+        .split("\n\n")
+        .map(|b| {
+            b.split("\n")
+                .map(|br| {
+                    br.split(" ")
+                        .filter(|s| !s.is_empty())
+                        .map(|n| n.parse().unwrap())
+                        .collect()
+                })
+                .collect()
+        })
+        .collect();
 }
