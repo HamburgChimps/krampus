@@ -347,7 +347,7 @@ fn day4() {
                         })
                         .collect()
                 })
-                .collect::<Board>()
+                .collect()
         })
         .collect();
 
