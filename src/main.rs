@@ -1,5 +1,4 @@
-use core::num::dec2flt::number::Number;
-use std::{fs, stream::FromIter};
+use std::fs;
 
 fn main() {
     day1();
@@ -308,11 +307,13 @@ fn day4() {
 
     let draws: Vec<u32> = draws_input.split(',').map(|d| d.parse().unwrap()).collect();
 
+    #[derive(Debug)]
     struct Board {
         data: Vec<Vec<Num>>,
         bingo: bool,
     }
 
+    #[derive(Debug)]
     struct Num {
         data: u32,
         marked: bool,
@@ -320,12 +321,18 @@ fn day4() {
 
     impl FromIterator<Vec<Num>> for Board {
         fn from_iter<T: IntoIterator<Item = Vec<Num>>>(iter: T) -> Self {
-            let mut b = Board {};
-            for row in iter {}
+            let mut b = Board {
+                data: Vec::new(),
+                bingo: false,
+            };
+
+            for row in iter {
+                b.data.push(row);
+            }
+
+            b
         }
     }
-
-    // finsih implementing fromiter for board and num
 
     let boards: Vec<Board> = boards_input
         .split("\n\n")
@@ -343,4 +350,6 @@ fn day4() {
                 .collect::<Board>()
         })
         .collect();
+
+    println!("boards: {:?}", boards);
 }
