@@ -352,4 +352,11 @@ fn day4() {
         .collect();
 
     println!("boards: {:?}", boards);
+
+    // loop through draws
+    // for each draw, mark that number in each board as marked
+    // then check bingo status of board
+    // when true than compute score of board
+    // done
+
 }
