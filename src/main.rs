@@ -319,6 +319,12 @@ fn day4() {
         marked: bool,
     }
 
+    impl Board {
+        fn mark(&mut self, num: Num) {
+
+        }
+    }
+
     impl FromIterator<Vec<Num>> for Board {
         fn from_iter<T: IntoIterator<Item = Vec<Num>>>(iter: T) -> Self {
             let mut b = Board {
@@ -354,6 +360,7 @@ fn day4() {
     println!("boards: {:?}", boards);
 
     for draw in draws {
-        for mut board in &boards {}
+        for mut board in &boards {
+        }
     }
 }
