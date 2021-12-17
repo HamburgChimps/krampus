@@ -353,10 +353,7 @@ fn day4() {
 
     println!("boards: {:?}", boards);
 
-    // loop through draws
-    // for each draw, mark that number in each board as marked
-    // then check bingo status of board
-    // when true than compute score of board
-    // done
-
+    for draw in draws {
+        for mut board in &boards {}
+    }
 }
