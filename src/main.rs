@@ -322,7 +322,7 @@ fn day4() {
     impl Board {
         fn mark(&mut self, draw: u32) {
             for row in &mut self.data {
-                for mut num in row {
+                for num in row {
                     if num.data == draw {
                         num.marked = true;
                     }
