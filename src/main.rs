@@ -1,4 +1,4 @@
-use std::fs;
+use std::{fs, vec};
 
 fn main() {
     day1();
@@ -329,6 +329,17 @@ fn day4() {
                 }
             }
         }
+
+        fn set_bingo_status(&mut self) {
+            let mut row_marked: Vec<Vec<bool>> = Vec::new();
+            let mut column_marked: Vec<bool> = Vec::new();
+            for row in &self.data {
+                row_marked.push(Vec::new());
+                for num in row {
+                    if num.marked {}
+                }
+            }
+        }
     }
 
     impl FromIterator<Vec<Num>> for Board {
@@ -366,6 +377,7 @@ fn day4() {
     for draw in draws {
         for board in boards.iter_mut() {
             board.mark(draw);
+            board.set_bingo_status();
         }
     }
 
