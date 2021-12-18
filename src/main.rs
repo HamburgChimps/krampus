@@ -320,8 +320,14 @@ fn day4() {
     }
 
     impl Board {
-        fn mark(&mut self, num: Num) {
-
+        fn mark(&mut self, draw: u32) {
+            for row in &mut self.data {
+                for mut num in row {
+                    if num.data == draw {
+                        num.marked = true;
+                    }
+                }
+            }
         }
     }
 
@@ -340,7 +346,7 @@ fn day4() {
         }
     }
 
-    let boards: Vec<Board> = boards_input
+    let mut boards: Vec<Board> = boards_input
         .split("\n\n")
         .map(|b| {
             b.split("\n")
@@ -357,10 +363,11 @@ fn day4() {
         })
         .collect();
 
-    println!("boards: {:?}", boards);
-
     for draw in draws {
-        for mut board in &boards {
+        for board in boards.iter_mut() {
+            board.mark(draw);
         }
     }
+
+    println!("boards: {:?}", boards);
 }
