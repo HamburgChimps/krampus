@@ -331,10 +331,15 @@ fn day4() {
         }
 
         fn set_bingo_status(&mut self) {
-            let mut row_marked: Vec<Vec<bool>> = Vec::new();
-            let mut column_marked: Vec<bool> = Vec::new();
+            let row_size = self.data.get(0).unwrap().len();
+            let column_size = self.data.len();
+
+            let mut rows_marked: Vec<Vec<bool>> = Vec::new();
+            let mut columns_marked: Vec<Vec<bool>> = Vec::new();
+
             for row in &self.data {
-                row_marked.push(Vec::new());
+                rows_marked.push(Vec::new());
+                columns_marked.push(Vec::new());
                 for num in row {
                     if num.marked {}
                 }
