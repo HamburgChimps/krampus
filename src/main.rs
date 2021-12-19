@@ -334,15 +334,8 @@ fn day4() {
             let row_size = self.data.get(0).unwrap().len();
             let column_size = self.data.len();
 
-            let mut rows_marked: Vec<Vec<bool>> = Vec::new();
-            let mut columns_marked: Vec<Vec<bool>> = Vec::new();
-
             for row in &self.data {
-                rows_marked.push(Vec::new());
-                columns_marked.push(Vec::new());
-                for num in row {
-                    if num.marked {}
-                }
+                let marked: Vec<&Num> = row.iter().filter(|&n| n.marked).collect();
             }
         }
     }
