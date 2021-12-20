@@ -331,12 +331,12 @@ fn day4() {
         }
 
         fn set_bingo_status(&mut self) {
-            let row_size = self.data.get(0).unwrap().len();
-            let column_size = self.data.len();
+            let num_columns = self.data.get(0).unwrap().len();
+            let num_rows = self.data.len();
 
             for row in &self.data {
                 let marked: Vec<&Num> = row.iter().filter(|&n| n.marked).collect();
-                if marked.len() == row_size {
+                if marked.len() == num_columns {
                     self.bingo = true;
                     break;
                 }
