@@ -336,6 +336,10 @@ fn day4() {
 
             for row in &self.data {
                 let marked: Vec<&Num> = row.iter().filter(|&n| n.marked).collect();
+                if marked.len() == row_size {
+                    self.bingo = true;
+                    break;
+                }
             }
         }
     }
