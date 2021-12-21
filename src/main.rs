@@ -1,4 +1,3 @@
-use core::num;
 use std::{fs, vec};
 
 fn main() {
@@ -335,11 +334,25 @@ fn day4() {
             let num_columns = self.data.get(0).unwrap().len();
             let num_rows = self.data.len();
 
-            let marked_columns: Vec<Vec<&Num>> = vec![Vec::new(); num_columns];
+            let mut marked_columns: Vec<Vec<&Num>> =
+                vec![Vec::with_capacity(num_rows); num_columns];
 
             for row in &self.data {
-                let marked: Vec<&Num> = row.iter().filter(|&n| n.marked).collect();
+                let marked: Vec<(usize, &Num)> =
+                    row.iter().enumerate().filter(|&(_i, n)| n.marked).collect();
+
+                for &(i, num) in &marked {
+                    marked_columns[i].push(num);
+                }
+
                 if marked.len() == num_columns {
+                    self.bingo = true;
+                    break;
+                }
+            }
+
+            for column in marked_columns {
+                if column.len() == num_rows {
                     self.bingo = true;
                     break;
                 }
@@ -379,12 +392,19 @@ fn day4() {
         })
         .collect();
 
+    let bingo_board: Board;
+
     for draw in draws {
         for board in boards.iter_mut() {
             board.mark(draw);
             board.set_bingo_status();
+
+            if board.bingo {
+                bingo_board = board;
+                break;
+            }
         }
     }
 
-    println!("boards: {:?}", boards);
+    println!("{:#x?}", bingo_board);
 }
