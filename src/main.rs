@@ -1,3 +1,4 @@
+use core::num;
 use std::{fs, vec};
 
 fn main() {
@@ -333,6 +334,8 @@ fn day4() {
         fn set_bingo_status(&mut self) {
             let num_columns = self.data.get(0).unwrap().len();
             let num_rows = self.data.len();
+
+            let marked_columns: Vec<Vec<&Num>> = vec![Vec::new(); num_columns];
 
             for row in &self.data {
                 let marked: Vec<&Num> = row.iter().filter(|&n| n.marked).collect();
