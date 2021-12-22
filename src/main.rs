@@ -392,15 +392,21 @@ fn day4() {
         })
         .collect();
 
-    let bingo_board: Board;
+    let mut bingo_board: &Board;
+    let mut found_bingo = false;
 
     for draw in draws {
-        for board in boards.iter_mut() {
+        if found_bingo {
+            break;
+        }
+
+        for board in &boards {
             board.mark(draw);
             board.set_bingo_status();
 
             if board.bingo {
                 bingo_board = board;
+                found_bingo = true;
                 break;
             }
         }
