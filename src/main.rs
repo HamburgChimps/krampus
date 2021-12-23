@@ -301,7 +301,7 @@ fn day3() {
 }
 
 fn day4() {
-    let input = fs::read_to_string("input/day4.txt").unwrap();
+    let input = fs::read_to_string("input/day4example.txt").unwrap();
 
     let (draws_input, boards_input) = input.split_once("\n\n").unwrap();
 
@@ -362,13 +362,18 @@ fn day4() {
         }
 
         fn score(&self) -> u32 {
-            self.data
+            let sum = self.data
                 .iter()
                 .flatten()
                 .filter(|&n| !n.marked)
                 .map(|n| n.data)
-                .sum::<u32>()
-                * self.last_marked.as_ref().unwrap().data
+                .sum::<u32>();
+
+            let last_marked = self.last_marked.as_ref().unwrap().data;
+
+            println!("sum: {} last_marked: {}", sum, last_marked);
+
+                sum * self.last_marked.as_ref().unwrap().data
         }
     }
 
@@ -445,6 +450,7 @@ fn day4() {
                     boards.get_mut(i).unwrap().bingo = false;
                 }
             }
+            break;
         }
     }
 
