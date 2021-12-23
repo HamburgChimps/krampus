@@ -424,6 +424,5 @@ fn day4() {
     }
 
     let winning_board = boards.into_iter().find(|b| b.bingo).unwrap();
-
     println!("day 4 part 1 answer: {}", winning_board.score());
 }
