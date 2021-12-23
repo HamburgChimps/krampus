@@ -361,14 +361,15 @@ fn day4() {
             }
         }
 
-        fn score(self) -> () {
-            /*    self.data
-            .iter()
-            .filter(|&&c| c.iter().filter(|&&n| n.marked).collect::<Vec<&Num>>().len() > 0)
-            .unwrap()
-            .into_iter()
-            .map(|n| n.data)
-            .sum() */
+        fn score(self) -> u32 {
+            self.data
+                .iter()
+                .filter(|&r| r.iter().filter(|&n| !n.marked).collect::<Vec<&Num>>().len() > 0)
+                .flatten()
+                .filter(|&n| !n.marked)
+                .map(|n| n.data)
+                .sum::<u32>()
+                * self.last_marked.unwrap().data
         }
     }
 
@@ -425,5 +426,5 @@ fn day4() {
 
     let winning_board = boards.into_iter().find(|b| b.bingo).unwrap();
 
-    println!("{:#?}", winning_board.score());
+    println!("day 4 part 1 answer: {}", winning_board.score());
 }
