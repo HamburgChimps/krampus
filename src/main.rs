@@ -362,7 +362,8 @@ fn day4() {
         }
 
         fn score(&self) -> u32 {
-            let sum = self.data
+            let sum = self
+                .data
                 .iter()
                 .flatten()
                 .filter(|&n| !n.marked)
@@ -373,7 +374,7 @@ fn day4() {
 
             println!("sum: {} last_marked: {}", sum, last_marked);
 
-                sum * self.last_marked.as_ref().unwrap().data
+            sum * self.last_marked.as_ref().unwrap().data
         }
     }
 
@@ -431,6 +432,8 @@ fn day4() {
     let winning_board = boards.iter().find(|&b| b.bingo).unwrap();
     println!("day 4 part 1 answer: {}", winning_board.score());
 
+    let mut boards_without_bingo = boards.len();
+
     for draw in draws {
         let mut current_bingo_board_idx = None;
         for (i, board) in boards.iter_mut().enumerate() {
@@ -439,12 +442,14 @@ fn day4() {
 
             if board.bingo {
                 current_bingo_board_idx = Some(i);
+                boards_without_bingo -= 1;
+                if boards_without_bingo == 0 {
+                    break;
+                }
             }
         }
 
-        let boards_without_bingo: Vec<&Board> = boards.iter().filter(|&b| !b.bingo).collect();
-
-        if boards_without_bingo.len() == 0 {
+        if boards_without_bingo == 0 {
             for i in 0..boards.len() {
                 if i != current_bingo_board_idx.unwrap() {
                     boards.get_mut(i).unwrap().bingo = false;
