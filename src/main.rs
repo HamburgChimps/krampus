@@ -364,7 +364,6 @@ fn day4() {
         fn score(self) -> u32 {
             self.data
                 .iter()
-                .filter(|&r| r.iter().filter(|&n| !n.marked).collect::<Vec<&Num>>().len() > 0)
                 .flatten()
                 .filter(|&n| !n.marked)
                 .map(|n| n.data)
