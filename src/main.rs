@@ -311,9 +311,10 @@ fn day4() {
     struct Board {
         data: Vec<Vec<Num>>,
         bingo: bool,
+        last_marked: Option<Num>,
     }
 
-    #[derive(Debug)]
+    #[derive(Debug, Clone)]
     struct Num {
         data: u32,
         marked: bool,
@@ -325,6 +326,7 @@ fn day4() {
                 for num in row {
                     if num.data == draw {
                         num.marked = true;
+                        self.last_marked = Some(num.clone());
                     }
                 }
             }
@@ -358,6 +360,16 @@ fn day4() {
                 }
             }
         }
+
+        fn score(self) -> () {
+            /*    self.data
+            .iter()
+            .filter(|&&c| c.iter().filter(|&&n| n.marked).collect::<Vec<&Num>>().len() > 0)
+            .unwrap()
+            .into_iter()
+            .map(|n| n.data)
+            .sum() */
+        }
     }
 
     impl FromIterator<Vec<Num>> for Board {
@@ -365,6 +377,7 @@ fn day4() {
             let mut b = Board {
                 data: Vec::new(),
                 bingo: false,
+                last_marked: None,
             };
 
             for row in iter {
@@ -410,12 +423,7 @@ fn day4() {
         }
     }
 
-    let winning_board: &Board = boards
-        .iter()
-        .filter(|&b| b.bingo)
-        .collect::<Vec<&Board>>()
-        .first()
-        .unwrap();
+    let winning_board = boards.into_iter().find(|b| b.bingo).unwrap();
 
-    println!("{:#?}", winning_board);
+    println!("{:#?}", winning_board.score());
 }
