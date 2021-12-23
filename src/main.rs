@@ -392,7 +392,6 @@ fn day4() {
         })
         .collect();
 
-    let mut bingo_board: &Board;
     let mut found_bingo = false;
 
     for draw in draws {
@@ -400,17 +399,23 @@ fn day4() {
             break;
         }
 
-        for board in &boards {
+        for board in &mut boards {
             board.mark(draw);
             board.set_bingo_status();
 
             if board.bingo {
-                bingo_board = board;
                 found_bingo = true;
                 break;
             }
         }
     }
 
-    println!("{:#x?}", bingo_board);
+    let winning_board: &Board = boards
+        .iter()
+        .filter(|&b| b.bingo)
+        .collect::<Vec<&Board>>()
+        .first()
+        .unwrap();
+
+    println!("{:#?}", winning_board);
 }
