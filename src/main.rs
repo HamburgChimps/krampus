@@ -450,17 +450,18 @@ fn day4() {
         }
 
         if boards_without_bingo == 0 {
+            println!("idx: {}", current_bingo_board_idx.unwrap());
             for i in 0..boards.len() {
                 if i != current_bingo_board_idx.unwrap() {
                     boards.get_mut(i).unwrap().bingo = false;
                 }
             }
+
             break;
         }
     }
 
     let winning_board = boards.iter().find(|&b| b.bingo).unwrap();
 
-    println!("winning board: {:#?}", winning_board);
     println!("day 4 part 2 answer: {}", winning_board.score());
 }
