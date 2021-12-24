@@ -5,6 +5,7 @@ fn main() {
     day2();
     day3();
     day4();
+    day5();
 }
 
 fn day1() {
@@ -477,4 +478,10 @@ fn day4() {
     let winning_board = boards.iter().find(|&b| b.bingo).unwrap();
 
     println!("day 4 part 2 answer: {}", winning_board.score());
+}
+
+fn day5() {
+    let input = fs::read_to_string("input/day5.txt").unwrap();
+
+    println!("day 5 wip, input is: {}", input);
 }
