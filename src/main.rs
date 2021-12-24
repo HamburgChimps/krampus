@@ -301,7 +301,7 @@ fn day3() {
 }
 
 fn day4() {
-    let input = fs::read_to_string("input/day4example.txt").unwrap();
+    let input = fs::read_to_string("input/day4.txt").unwrap();
 
     let (draws_input, boards_input) = input.split_once("\n\n").unwrap();
 
@@ -370,11 +370,18 @@ fn day4() {
                 .map(|n| n.data)
                 .sum::<u32>();
 
-            let last_marked = self.last_marked.as_ref().unwrap().data;
-
-            println!("sum: {} last_marked: {}", sum, last_marked);
-
             sum * self.last_marked.as_ref().unwrap().data
+        }
+
+        fn reset(&mut self) {
+            for row in &mut self.data {
+                for num in row {
+                    num.marked = false;
+                }
+            }
+
+            self.bingo = false;
+            self.last_marked = None;
         }
     }
 
@@ -432,17 +439,24 @@ fn day4() {
     let winning_board = boards.iter().find(|&b| b.bingo).unwrap();
     println!("day 4 part 1 answer: {}", winning_board.score());
 
+    for board in &mut boards {
+        board.reset();
+    }
+
     let mut boards_without_bingo = boards.len();
 
     for draw in draws {
         let mut current_bingo_board_idx = None;
         for (i, board) in boards.iter_mut().enumerate() {
+            let prev_bingo_status = board.bingo;
+
             board.mark(draw);
             board.set_bingo_status();
 
-            if board.bingo {
+            if board.bingo && !prev_bingo_status {
                 current_bingo_board_idx = Some(i);
                 boards_without_bingo -= 1;
+
                 if boards_without_bingo == 0 {
                     break;
                 }
@@ -450,7 +464,6 @@ fn day4() {
         }
 
         if boards_without_bingo == 0 {
-            println!("idx: {}", current_bingo_board_idx.unwrap());
             for i in 0..boards.len() {
                 if i != current_bingo_board_idx.unwrap() {
                     boards.get_mut(i).unwrap().bingo = false;
