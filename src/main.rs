@@ -481,7 +481,22 @@ fn day4() {
 }
 
 fn day5() {
-    let input = fs::read_to_string("input/day5.txt").unwrap();
+    let input = fs::read_to_string("input/day5example.txt").unwrap();
 
-    println!("day 5 wip, input is: {}", input);
+    let lines: Vec<Vec<Vec<u32>>> = input
+        .lines()
+        .map(|l| {
+            l.split("->")
+                .map(|point| {
+                    point
+                        .trim()
+                        .split(',')
+                        .map(|num| num.parse::<u32>().unwrap())
+                        .collect()
+                })
+                .collect()
+        })
+        .collect();
+
+    println!("lines: {:#?}", lines);
 }
