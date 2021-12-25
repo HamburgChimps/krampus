@@ -498,5 +498,21 @@ fn day5() {
         })
         .collect();
 
-    println!("lines: {:#?}", lines);
+    let mut grid_length: u32 = 0;
+    let mut grid_width: u32 = 0;
+
+    for line in &lines {
+        for point in line {
+            let &x = point.get(0).unwrap();
+            let &y = point.get(1).unwrap();
+
+            if y > grid_length {
+                grid_length = y;
+            }
+
+            if x > grid_width {
+                grid_width = x;
+            }
+        }
+    }
 }
