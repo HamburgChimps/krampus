@@ -518,6 +518,6 @@ fn day5() {
 
     let grid: Vec<u32> = vec![0; (grid_length * grid_width) as usize];
 
-    // loop through grid marking lines
+    // loop through lines marking grid
     // count points of overlap
 }
