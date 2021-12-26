@@ -520,4 +520,19 @@ fn day5() {
 
     // loop through lines marking grid
     // count points of overlap
+
+    println!("lines: {:#?}", lines);
+    println!("grid: {:#?}", grid);
+
+    let relevant_lines: Vec<Vec<Vec<u32>>> = lines
+        .iter()
+        .filter(|&line|
+            line[0].iter().zip(line[1].iter()).any(
+                |(p1_ordered_pair_part, p2_ordered_pair_part)|
+                    p1_ordered_pair_part == p2_ordered_pair_part
+            )
+        )
+        .collect();
+
+    println!("relavant_lines: {:#?}", relevant_lines);
 }
