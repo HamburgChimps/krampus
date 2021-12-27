@@ -494,11 +494,13 @@ fn day5() {
             }
         }
 
-        fn trace(&mut self, line: &Vec<Vec<u32>>) {
-            for point in line {
-                let &x = point.get(0).unwrap();
-                let &y = point.get(1).unwrap();
-                self.mark(x, y);
+        fn trace(&mut self, lines: Vec<&Vec<Vec<u32>>>) {
+            for line in lines {
+                for point in line {
+                    let &x = point.get(0).unwrap();
+                    let &y = point.get(1).unwrap();
+                    self.mark(x, y);
+                }
             }
         }
 
@@ -582,9 +584,7 @@ fn day5() {
         .collect();
 
     // this marking logic needs to mark lines not just points
-    for line in relevant_lines {
-        grid.trace(line);
-    }
+    grid.trace(relevant_lines);
 
     println!("{}", grid);
 }
