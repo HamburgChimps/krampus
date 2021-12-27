@@ -540,5 +540,20 @@ fn day5() {
         }
     }
 
-    println!("grid: {:#?}", grid);
+    println!(
+        "{}",
+        grid.iter()
+            .enumerate()
+            .fold(String::new(), |mut acc, (i, element)| {
+                acc = match element {
+                    0 => format!("{}{}", acc, '.'),
+                    _ => format!("{}{}", acc, element),
+                };
+                if i != 0 && (i + 1) % grid_length as usize == 0 {
+                    acc = format!("{}{}", acc, '\n');
+                }
+
+                acc
+            })
+    );
 }
