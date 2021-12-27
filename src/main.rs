@@ -516,13 +516,10 @@ fn day5() {
         }
     }
 
-    let grid: Vec<u32> = vec![0; (grid_length * grid_width) as usize];
+    grid_length += 1;
+    grid_width += 1;
 
-    // loop through lines marking grid
-    // count points of overlap
-
-    println!("lines: {:#?}", lines);
-    println!("grid: {:#?}", grid);
+    let mut grid: Vec<u32> = vec![0; (grid_length * grid_width) as usize];
 
     let relevant_lines: Vec<&Vec<Vec<u32>>> = lines
         .iter()
@@ -535,5 +532,14 @@ fn day5() {
         })
         .collect();
 
-    println!("relavant_lines: {:#?}", relevant_lines);
+    for line in relevant_lines {
+        for point in line {
+            println!("p0: {} p1: {}", point[0], point[1]);
+            let x = point[0];
+            let y = point[1];
+            grid[(grid_length * y + x) as usize] += 1;
+        }
+    }
+
+    println!("grid: {:#?}", grid);
 }
