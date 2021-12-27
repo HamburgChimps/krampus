@@ -534,7 +534,6 @@ fn day5() {
 
     for line in relevant_lines {
         for point in line {
-            println!("p0: {} p1: {}", point[0], point[1]);
             let x = point[0];
             let y = point[1];
             grid[(grid_length * y + x) as usize] += 1;
