@@ -1,4 +1,4 @@
-use std::fs;
+use std::{fmt, fs};
 
 fn main() {
     day1();
@@ -481,6 +481,55 @@ fn day4() {
 }
 
 fn day5() {
+    struct Grid {
+        data: Vec<u32>,
+        height: u32,
+    }
+
+    impl Grid {
+        fn new(height: u32, width: u32) -> Grid {
+            Grid {
+                data: vec![0; (height * width) as usize],
+                height,
+            }
+        }
+
+        fn trace_line(&mut self, line: &Vec<Vec<u32>>) {
+            for point in line {
+                let &x = point.get(0).unwrap();
+                let &y = point.get(1).unwrap();
+                self.mark(x, y);
+            }
+        }
+
+        fn mark(&mut self, x: u32, y: u32) {
+            self.data[(self.height * y + x) as usize] += 1;
+        }
+    }
+
+    impl fmt::Display for Grid {
+        fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+            write!(
+                f,
+                "{}",
+                self.data
+                    .iter()
+                    .enumerate()
+                    .fold(String::new(), |mut acc, (i, element)| {
+                        acc = match element {
+                            0 => format!("{}{}", acc, '.'),
+                            _ => format!("{}{}", acc, element),
+                        };
+                        if i != 0 && (i + 1) % self.height as usize == 0 {
+                            acc = format!("{}{}", acc, '\n');
+                        }
+
+                        acc
+                    })
+            )
+        }
+    }
+
     let input = fs::read_to_string("input/day5example.txt").unwrap();
 
     let lines: Vec<Vec<Vec<u32>>> = input
@@ -498,7 +547,7 @@ fn day5() {
         })
         .collect();
 
-    let mut grid_length: u32 = 0;
+    let mut grid_height: u32 = 0;
     let mut grid_width: u32 = 0;
 
     for line in &lines {
@@ -506,8 +555,8 @@ fn day5() {
             let &x = point.get(0).unwrap();
             let &y = point.get(1).unwrap();
 
-            if y > grid_length {
-                grid_length = y;
+            if y > grid_height {
+                grid_height = y;
             }
 
             if x > grid_width {
@@ -516,10 +565,10 @@ fn day5() {
         }
     }
 
-    grid_length += 1;
+    grid_height += 1;
     grid_width += 1;
 
-    let mut grid: Vec<u32> = vec![0; (grid_length * grid_width) as usize];
+    let mut grid = Grid::new(grid_height, grid_width);
 
     let relevant_lines: Vec<&Vec<Vec<u32>>> = lines
         .iter()
@@ -534,27 +583,8 @@ fn day5() {
 
     // this marking logic needs to mark lines not just points
     for line in relevant_lines {
-        for point in line {
-            let x = point.get(0).unwrap();
-            let y = point.get(1).unwrap();
-            grid[(grid_length * y + x) as usize] += 1;
-        }
+        grid.trace_line(line);
     }
 
-    println!(
-        "{}",
-        grid.iter()
-            .enumerate()
-            .fold(String::new(), |mut acc, (i, element)| {
-                acc = match element {
-                    0 => format!("{}{}", acc, '.'),
-                    _ => format!("{}{}", acc, element),
-                };
-                if i != 0 && (i + 1) % grid_length as usize == 0 {
-                    acc = format!("{}{}", acc, '\n');
-                }
-
-                acc
-            })
-    );
+    println!("{}", grid);
 }
