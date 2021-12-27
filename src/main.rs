@@ -535,8 +535,8 @@ fn day5() {
     // this marking logic needs to mark lines not just points
     for line in relevant_lines {
         for point in line {
-            let x = point[0];
-            let y = point[1];
+            let x = point.get(0).unwrap();
+            let y = point.get(1).unwrap();
             grid[(grid_length * y + x) as usize] += 1;
         }
     }
