@@ -494,7 +494,7 @@ fn day5() {
             }
         }
 
-        fn trace_line(&mut self, line: &Vec<Vec<u32>>) {
+        fn trace(&mut self, line: &Vec<Vec<u32>>) {
             for point in line {
                 let &x = point.get(0).unwrap();
                 let &y = point.get(1).unwrap();
@@ -583,7 +583,7 @@ fn day5() {
 
     // this marking logic needs to mark lines not just points
     for line in relevant_lines {
-        grid.trace_line(line);
+        grid.trace(line);
     }
 
     println!("{}", grid);
