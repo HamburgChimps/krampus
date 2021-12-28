@@ -503,18 +503,36 @@ fn day5() {
                 let line_start = (line[0][0], line[0][1]);
                 let line_end = (line[1][0], line[1][1]);
 
-                points.push(line_start);
-                points.push(line_end);
+                let (mut x, mut y) = line_start;
 
-                println!("points: {:#?}", points);
+                loop {
+                    points.push((x, y));
 
-                let mut x: u32 = 0;
-                let mut y: u32 = 0;
+                    if x < line_end.0 && y == line_end.1 {
+                        x += 1;
+                        continue;
+                    }
+
+                    if x == line_end.0 && y < line_end.1 {
+                        y += 1;
+                        continue;
+                    }
+
+                    break;
+                }
+
+                for point in points {
+                    self.mark(point.0, point.1);
+                }
             }
         }
 
         fn mark(&mut self, x: u32, y: u32) {
             self.data[(self.height * y + x) as usize] += 1;
+        }
+
+        fn overlaps(&self) -> usize {
+            self.data.iter().filter(|&&e| e >= 2).count()
         }
     }
 
@@ -541,7 +559,7 @@ fn day5() {
         }
     }
 
-    let input = fs::read_to_string("input/day5example.txt").unwrap();
+    let input = fs::read_to_string("input/day5.txt").unwrap();
 
     let lines: Vec<Vec<Vec<u32>>> = input
         .lines()
@@ -595,5 +613,5 @@ fn day5() {
 
     grid.trace(relevant_lines);
 
-    println!("{}", grid);
+    println!("day 5 part 1 answer: {}", grid.overlaps());
 }
