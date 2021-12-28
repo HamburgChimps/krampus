@@ -495,9 +495,7 @@ fn day5() {
         }
 
         fn trace(&mut self, lines: Vec<Vec<Vec<u32>>>) {
-            for mut line in lines {
-                line.sort();
-
+            for line in lines {
                 let mut points = Vec::new();
 
                 let line_start = (line[0][0], line[0][1]);
@@ -508,17 +506,28 @@ fn day5() {
                 loop {
                     points.push((x, y));
 
-                    if x < line_end.0 && y == line_end.1 {
+                    let old_x = x;
+                    let old_y = y;
+
+                    if x < line_end.0 {
                         x += 1;
-                        continue;
                     }
 
-                    if x == line_end.0 && y < line_end.1 {
+                    if x > line_end.0 {
+                        x -= 1;
+                    }
+
+                    if y < line_end.1 {
                         y += 1;
-                        continue;
                     }
 
-                    break;
+                    if y > line_end.1 {
+                        y -= 1;
+                    }
+
+                    if old_x == x && old_y == y {
+                        break;
+                    }
                 }
 
                 for point in points {
@@ -614,4 +623,9 @@ fn day5() {
     grid.trace(relevant_lines);
 
     println!("day 5 part 1 answer: {}", grid.overlaps());
+
+    let mut grid = Grid::new(grid_height, grid_width);
+    grid.trace(lines);
+
+    println!("day 5 part 2 answer: {}", grid.overlaps());
 }
