@@ -6,6 +6,7 @@ fn main() {
     day3();
     day4();
     day5();
+    day6();
 }
 
 fn day1() {
@@ -628,4 +629,10 @@ fn day5() {
     grid.trace(lines);
 
     println!("day 5 part 2 answer: {}", grid.overlaps());
+}
+
+fn day6() {
+    let input = fs::read_to_string("input/day6example.txt").unwrap();
+
+    println!("input: {}", input);
 }
