@@ -653,12 +653,6 @@ fn day6() {
         }
     }
 
-    impl fmt::Display for Lanternfish {
-        fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-            write!(f, "{}", self.countdown)
-        }
-    }
-
     let input = fs::read_to_string("input/day6.txt").unwrap();
 
     let mut fishies: Vec<Lanternfish> = input
