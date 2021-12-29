@@ -632,7 +632,48 @@ fn day5() {
 }
 
 fn day6() {
-    let input = fs::read_to_string("input/day6example.txt").unwrap();
+    struct Lanternfish {
+        countdown: u32,
+    }
 
-    println!("input: {}", input);
+    impl Lanternfish {
+        fn new(countdown: u32) -> Lanternfish {
+            Lanternfish { countdown }
+        }
+
+        fn live_life(&mut self) -> Option<Lanternfish> {
+            if self.countdown == 0 {
+                self.countdown = 6;
+                return Some(Lanternfish::new(8));
+            }
+
+            self.countdown -= 1;
+
+            None
+        }
+    }
+
+    impl fmt::Display for Lanternfish {
+        fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+            write!(f, "{}", self.countdown)
+        }
+    }
+
+    let input = fs::read_to_string("input/day6.txt").unwrap();
+
+    let mut fishies: Vec<Lanternfish> = input
+        .split(',')
+        .map(|countdown| Lanternfish::new(countdown.parse().unwrap()))
+        .collect();
+
+    for _day in 0..80 {
+        let mut baby_fishies: Vec<Lanternfish> = Vec::new();
+        for fishy in &mut fishies {
+            if let Some(fishy) = fishy.live_life() {
+                baby_fishies.push(fishy);
+            }
+        }
+        fishies.append(&mut baby_fishies);
+    }
+    println!("day 6 part 1 answer: {}", fishies.into_iter().count());
 }
