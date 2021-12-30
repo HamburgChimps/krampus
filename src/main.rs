@@ -7,6 +7,7 @@ fn main() {
     day4();
     day5();
     day6();
+    day7();
 }
 
 fn day1() {
@@ -700,4 +701,10 @@ fn day6() {
         "day 6 part 2 answer: {}",
         fishies_by_age.into_iter().sum::<u64>()
     );
+}
+
+fn day7() {
+    let input = fs::read_to_string("input/day7.txt").unwrap();
+
+    println!("day 7 part 1 answer: {}", "idk");
 }
