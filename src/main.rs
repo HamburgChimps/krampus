@@ -704,7 +704,34 @@ fn day6() {
 }
 
 fn day7() {
-    let input = fs::read_to_string("input/day7.txt").unwrap();
+    let input = fs::read_to_string("input/day7example.txt").unwrap();
 
-    println!("day 7 part 1 answer: {}", "idk");
+    let mut crabs: Vec<u32> = input.split(',').map(|c| c.parse().unwrap()).collect();
+
+    crabs.sort();
+
+    let crabs_size = crabs.len();
+
+    let median: u32;
+
+    let crabs_size_even = crabs_size % 2 == 0;
+
+    match crabs_size_even {
+        true => median = crabs[(crabs_size / 2) - 1] + crabs[(crabs_size / 2) + 1],
+        false => median = crabs[(crabs_size / 2) + 1],
+    }
+
+    let mut fuel_spent = 0;
+
+    for &crab in &crabs {
+        if crab > median {
+            fuel_spent += crab - median;
+        }
+
+        if crab < median {
+            fuel_spent += median - crab;
+        }
+    }
+
+    println!("day 7 part 1 answer: {}", fuel_spent);
 }
