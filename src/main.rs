@@ -653,7 +653,7 @@ fn day6() {
         }
     }
 
-    let input = fs::read_to_string("input/day6.txt").unwrap();
+    let input = fs::read_to_string("input/day6example.txt").unwrap();
 
     let mut fishies: Vec<Lanternfish> = input
         .split(',')
@@ -663,11 +663,35 @@ fn day6() {
     for _day in 0..80 {
         let mut baby_fishies: Vec<Lanternfish> = Vec::new();
         for fishy in &mut fishies {
-            if let Some(fishy) = fishy.live_life() {
-                baby_fishies.push(fishy);
+            if let Some(baby_fishy) = fishy.live_life() {
+                baby_fishies.push(baby_fishy);
             }
         }
+
         fishies.append(&mut baby_fishies);
     }
+
     println!("day 6 part 1 answer: {}", fishies.into_iter().count());
+
+    let fishies: Vec<Lanternfish> = input
+        .split(',')
+        .map(|countdown| Lanternfish::new(countdown.parse().unwrap()))
+        .collect();
+
+    let mut fishies_by_age: [u32; 9] = fishies.into_iter().fold([0; 9], |mut acc, fishy| {
+        acc[fishy.countdown as usize] += 1;
+        acc
+    });
+
+    for _day in 0..256 {
+        for i in 0..8 {
+            if i == 0 {
+                fishies_by_age[8] += fishies_by_age[i];
+                fishies_by_age[6] += fishies_by_age[i];
+                continue;
+            }
+            fishies_by_age[i - 1] = fishies_by_age[i];
+        }
+    }
+    println!("day 6 part 2 answer: {:#?}", fishies_by_age);
 }
