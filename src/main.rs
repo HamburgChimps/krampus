@@ -684,7 +684,7 @@ fn day6() {
     });
 
     for _day in 0..256 {
-        for i in 0..8 {
+        for i in 0..9 {
             if i == 0 {
                 fishies_by_age[8] += fishies_by_age[i];
                 fishies_by_age[6] += fishies_by_age[i];
