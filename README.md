@@ -21,9 +21,9 @@ To try out the solutions clone the repo and run `cargo run` from the repository 
 - [x] Day 5
     - [x] Part 1
     - [x] Part 2
-- [ ] Day 6
+- [x] Day 6
     - [x] Part 1
-    - [ ] Part 2
+    - [x] Part 2
 - [ ] Day 7
     - [ ] Part 1
     - [ ] Part 2

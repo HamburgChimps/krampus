@@ -653,7 +653,7 @@ fn day6() {
         }
     }
 
-    let input = fs::read_to_string("input/day6example.txt").unwrap();
+    let input = fs::read_to_string("input/day6.txt").unwrap();
 
     let mut fishies: Vec<Lanternfish> = input
         .split(',')
@@ -678,20 +678,26 @@ fn day6() {
         .map(|countdown| Lanternfish::new(countdown.parse().unwrap()))
         .collect();
 
-    let mut fishies_by_age: [u32; 9] = fishies.into_iter().fold([0; 9], |mut acc, fishy| {
+    let mut fishies_by_age: [u64; 9] = fishies.into_iter().fold([0; 9], |mut acc, fishy| {
         acc[fishy.countdown as usize] += 1;
         acc
     });
 
     for _day in 0..256 {
+        let fishy_creators = fishies_by_age[0];
         for i in 0..9 {
             if i == 0 {
-                fishies_by_age[8] += fishies_by_age[i];
-                fishies_by_age[6] += fishies_by_age[i];
                 continue;
             }
             fishies_by_age[i - 1] = fishies_by_age[i];
         }
+
+        fishies_by_age[6] += fishy_creators;
+        fishies_by_age[8] = fishy_creators;
     }
-    println!("day 6 part 2 answer: {:#?}", fishies_by_age);
+
+    println!(
+        "day 6 part 2 answer: {}",
+        fishies_by_age.into_iter().sum::<u64>()
+    );
 }
