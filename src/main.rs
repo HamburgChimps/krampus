@@ -704,7 +704,7 @@ fn day6() {
 }
 
 fn day7() {
-    let input = fs::read_to_string("input/day7example.txt").unwrap();
+    let input = fs::read_to_string("input/day7.txt").unwrap();
 
     let mut crabs: Vec<u32> = input.split(',').map(|c| c.parse().unwrap()).collect();
 
@@ -712,25 +712,9 @@ fn day7() {
 
     let crabs_size = crabs.len();
 
-    let median: u32;
-
-    let crabs_size_even = crabs_size % 2 == 0;
-
-    match crabs_size_even {
-        true => median = (crabs[(crabs_size / 2) - 2] + crabs[(crabs_size / 2) - 1]) / 2,
-        false => median = crabs[(crabs_size / 2) - 1],
-    }
+    let median = crabs[crabs_size / 2];
 
     let mut fuel_spent = 0;
-
-    println!("median: {}", median);
-
-    println!("{:?}", crabs);
-    println!(
-        "{} {}",
-        crabs[(crabs_size / 2) - 2],
-        crabs[(crabs_size / 2) - 1]
-    );
 
     for &crab in &crabs {
         if crab > median {
