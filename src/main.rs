@@ -716,14 +716,21 @@ fn day7() {
 
     let crabs_size_even = crabs_size % 2 == 0;
 
-    println!("even: {}", crabs_size_even);
-
     match crabs_size_even {
-        true => median = (crabs[(crabs_size / 2) - 2] + crabs[(crabs_size / 2)]) / 2,
+        true => median = (crabs[(crabs_size / 2) - 2] + crabs[(crabs_size / 2) - 1]) / 2,
         false => median = crabs[(crabs_size / 2) - 1],
     }
 
     let mut fuel_spent = 0;
+
+    println!("median: {}", median);
+
+    println!("{:?}", crabs);
+    println!(
+        "{} {}",
+        crabs[(crabs_size / 2) - 2],
+        crabs[(crabs_size / 2) - 1]
+    );
 
     for &crab in &crabs {
         if crab > median {
