@@ -1,4 +1,4 @@
-use std::{fmt, fs};
+use std::{cmp::min, fmt, fs};
 
 fn main() {
     day1();
@@ -727,4 +727,22 @@ fn day7() {
     }
 
     println!("day 7 part 1 answer: {}", fuel_spent);
+
+    let mean: u32 = crabs.iter().sum::<u32>() / crabs_size as u32;
+
+    let mut fuel_candiates: (u32, u32) = (0, 0);
+
+    for &crab in &crabs {
+        let distance_candidates: (u32, u32) = (
+            (crab as i32 - mean as i32).abs() as u32,
+            (crab as i32 - (mean + 1) as i32).abs() as u32,
+        );
+
+        fuel_candiates.0 += (1..=distance_candidates.0).sum::<u32>();
+        fuel_candiates.1 += (1..=distance_candidates.1).sum::<u32>();
+    }
+
+    let optimal_fuel_expenditure = min(fuel_candiates.0, fuel_candiates.1);
+
+    println!("day 7 part 2 answer: {}", optimal_fuel_expenditure);
 }
