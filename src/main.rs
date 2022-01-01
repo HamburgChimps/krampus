@@ -8,6 +8,7 @@ fn main() {
     day5();
     day6();
     day7();
+    day8();
 }
 
 fn day1() {
@@ -745,4 +746,9 @@ fn day7() {
     let optimal_fuel_expenditure = min(fuel_candiates.0, fuel_candiates.1);
 
     println!("day 7 part 2 answer: {}", optimal_fuel_expenditure);
+}
+
+fn day8() {
+    let input = fs::read_to_string("input/day8example.txt").unwrap();
+    println!("day 8 input: {}", input);
 }
