@@ -751,4 +751,7 @@ fn day7() {
 fn day8() {
     let input = fs::read_to_string("input/day8example.txt").unwrap();
     println!("day 8 input: {}", input);
+    
+    // decude unique segment mapping
+    // count number of digits using unique segments that appear in output
 }
