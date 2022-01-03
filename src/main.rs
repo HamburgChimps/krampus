@@ -749,7 +749,7 @@ fn day7() {
 }
 
 fn day8() {
-    let input = fs::read_to_string("input/day8example.txt").unwrap();
+    let input = fs::read_to_string("input/day8.txt").unwrap();
 
     let displays: Vec<Vec<Vec<&str>>> = input
         .lines()
@@ -760,9 +760,12 @@ fn day8() {
         })
         .collect();
 
-    println!("displays: {:?}", displays);
+    let unique_segment_digit_count = displays
+        .iter()
+        .map(|d| d.get(1).unwrap())
+        .flatten()
+        .filter(|&out| out.len() == 2 || out.len() == 3 || out.len() == 4 || out.len() == 7)
+        .count();
 
-    // parse input into segment mappings
-    // deduce unique segment mappinps
-    // count number of digits using unique segments that appear in output
+    println!("day 8 part 1 answer: {}", unique_segment_digit_count);
 }
