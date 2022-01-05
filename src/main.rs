@@ -793,5 +793,5 @@ fn day8() {
         })
         .collect();
 
-    println!("segment map: {:?}", segments_on);
+    println!("segments on: {:?}", segments_on);
 }
