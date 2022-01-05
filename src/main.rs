@@ -769,7 +769,7 @@ fn day8() {
 
     println!("day 8 part 1 answer: {}", unique_segment_digit_count);
 
-    let segment_map: Vec<u32> = displays
+    let segments_on: Vec<u32> = displays
         .into_iter()
         .flatten()
         .flatten()
