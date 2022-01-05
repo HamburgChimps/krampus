@@ -749,7 +749,7 @@ fn day7() {
 }
 
 fn day8() {
-    let input = fs::read_to_string("input/day8.txt").unwrap();
+    let input = fs::read_to_string("input/day8example.txt").unwrap();
 
     let displays: Vec<Vec<Vec<&str>>> = input
         .lines()
@@ -768,4 +768,30 @@ fn day8() {
         .count();
 
     println!("day 8 part 1 answer: {}", unique_segment_digit_count);
+
+    let segment_map: Vec<u32> = displays
+        .into_iter()
+        .flatten()
+        .flatten()
+        .flat_map(|pattern| {
+            let mut map: [u32; 7] = [0; 7];
+
+            for char in pattern.chars() {
+                match char {
+                    'a' => map[0] = 1,
+                    'b' => map[1] = 1,
+                    'c' => map[2] = 1,
+                    'd' => map[3] = 1,
+                    'e' => map[4] = 1,
+                    'f' => map[5] = 1,
+                    'g' => map[6] = 1,
+                    _ => ()
+                };
+            }
+
+            map
+        })
+        .collect();
+
+    println!("segment map: {:?}", segment_map);
 }
