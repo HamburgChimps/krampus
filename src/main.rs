@@ -785,7 +785,7 @@ fn day8() {
                     'e' => map[4] = 1,
                     'f' => map[5] = 1,
                     'g' => map[6] = 1,
-                    _ => ()
+                    _ => (),
                 };
             }
 
@@ -793,5 +793,5 @@ fn day8() {
         })
         .collect();
 
-    println!("segment map: {:?}", segment_map);
+    println!("segment map: {:?}", segments_on);
 }
