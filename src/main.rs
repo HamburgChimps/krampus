@@ -821,6 +821,4 @@ fn day8() {
         current_row_start = current_row_end;
         current_row_end += SEGMENT_LEN * ROW_LEN;
     }
-
-    println!("segments on: {:?}", &segments_on[0..14 * 7]);
 }
