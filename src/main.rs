@@ -793,17 +793,33 @@ fn day8() {
         })
         .collect();
 
-    let digit_segment_len = 7;
+    const SEGMENT_LEN: usize = 7;
+    const ROW_LEN: usize = 14;
 
     let mut current_row_start = 0;
-    let mut current_row_end = 7 * 14;
+    let mut current_row_end = SEGMENT_LEN * ROW_LEN;
 
-    while current_row_end < segments_on.len() {
-        let segment_sums: [u32; 14] = [0; 14];
+    while current_row_end <= segments_on.len() {
+        let mut segment_sums: [u32; ROW_LEN] = [0; ROW_LEN];
 
-        for i in (current_row_start..current_row_end) {
-            segment_sums[i] = &segment_sums[]
+        let mut row_segment_map: [&str; SEGMENT_LEN] = [""; SEGMENT_LEN];
+
+        let mut current_segment_start = current_row_start;
+        let mut current_segment_end = current_row_start + SEGMENT_LEN;
+
+        for i in 0..segment_sums.len() {
+            segment_sums[i] = (&segments_on[current_segment_start..current_segment_end])
+                .iter()
+                .sum::<u32>();
+
+            current_segment_start = current_segment_end;
+            current_segment_end += SEGMENT_LEN;
         }
+
+        println!("segment_sums: {:?}", segment_sums);
+
+        current_row_start = current_row_end;
+        current_row_end += SEGMENT_LEN * ROW_LEN;
     }
 
     println!("segments on: {:?}", &segments_on[0..14 * 7]);
