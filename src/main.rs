@@ -793,5 +793,18 @@ fn day8() {
         })
         .collect();
 
-    println!("segments on: {:?}", segments_on);
+    let digit_segment_len = 7;
+
+    let mut current_row_start = 0;
+    let mut current_row_end = 7 * 14;
+
+    while current_row_end < segments_on.len() {
+        let segment_sums: [u32; 14] = [0; 14];
+
+        for i in (current_row_start..current_row_end) {
+            segment_sums[i] = &segment_sums[]
+        }
+    }
+
+    println!("segments on: {:?}", &segments_on[0..14 * 7]);
 }
