@@ -818,6 +818,15 @@ fn day8() {
 
         println!("segment_sums: {:?}", segment_sums);
 
+        let ones: Vec<usize> = segment_sums
+            .iter()
+            .enumerate()
+            .filter(|(_i, &sum)| sum == 2)
+            .map(|(i, _)| i)
+            .collect();
+
+        println!("ones: {:?}", ones);
+
         current_row_start = current_row_end;
         current_row_end += SEGMENT_LEN * ROW_LEN;
     }
