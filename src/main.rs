@@ -816,8 +816,6 @@ fn day8() {
             current_segment_end += SEGMENT_LEN;
         }
 
-        println!("segment_sums: {:?}", segment_sums);
-
         let ones: Vec<usize> = segment_sums
             .iter()
             .enumerate()
@@ -825,7 +823,16 @@ fn day8() {
             .map(|(i, _)| i)
             .collect();
 
-        println!("ones: {:?}", ones);
+        let sevens: Vec<usize> = segment_sums
+            .iter()
+            .enumerate()
+            .filter(|(_i, &sum)| sum == 3)
+            .map(|(i, _)| i)
+            .collect();
+
+        println!("ones: {:?} sevens: {:?}", ones, sevens);
+
+        // Don't need all just fist occurence
 
         current_row_start = current_row_end;
         current_row_end += SEGMENT_LEN * ROW_LEN;
