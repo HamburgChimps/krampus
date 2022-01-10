@@ -816,12 +816,13 @@ fn day8() {
             current_segment_end += SEGMENT_LEN;
         }
 
-        let ones: Vec<usize> = segment_sums
+        let one_segment_pattern: Vec<u32> = segment_sums
             .iter()
             .enumerate()
             .filter(|(_i, &sum)| sum == 2)
-            .map(|(i, _)| i)
-            .collect();
+            // stopped right here
+            .map(|(i, _sum)| segments_on[])
+            .next();
 
         let sevens: Vec<usize> = segment_sums
             .iter()
