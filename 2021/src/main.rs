@@ -769,7 +769,7 @@ fn day8() {
 
     println!("day 8 part 1 answer: {}", unique_segment_digit_count);
 
-    let segments_on: Vec<u32> = displays
+    /* let segments_on: Vec<u32> = displays
         .into_iter()
         .flatten()
         .flatten()
@@ -836,6 +836,5 @@ fn day8() {
         // Don't need all just fist occurence
 
         current_row_start = current_row_end;
-        current_row_end += SEGMENT_LEN * ROW_LEN;
+        current_row_end += SEGMENT_LEN * ROW_LEN; */
     }
-}
