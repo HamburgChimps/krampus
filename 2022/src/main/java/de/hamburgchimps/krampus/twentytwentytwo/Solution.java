@@ -14,7 +14,7 @@ public final class Solution {
                 .get();
     }
     public static final class DayOne {
-        // TODO: @next read input data`
+        // TODO: @next read input data
         private static final List<Supplier<Result>> store = List.of(DayOne::PartOne, DayOne::PartTwo);
 
         private static Result PartOne() {
