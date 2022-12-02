@@ -3,10 +3,6 @@ package de.hamburgchimps.krampus.twentytwentytwo;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.URISyntaxException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
 import java.util.function.Supplier;
 
@@ -21,7 +17,7 @@ public final class Solution {
     }
 
     public static final class DayOne {
-        private static List<Integer> input = getInput("day1.txt");
+        private static final List<Integer> input = getInput("day1.txt");
         private static final List<Supplier<Result>> store = List.of(DayOne::PartOne, DayOne::PartTwo);
 
         private static Result PartOne() {
