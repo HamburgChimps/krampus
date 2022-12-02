@@ -1,6 +1,9 @@
 package de.hamburgchimps.krampus.twentytwentytwo;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -16,6 +19,7 @@ public final class Solution {
                 .get(part - 1)
                 .get();
     }
+
     public static final class DayOne {
         private static List<Integer> input = getInput("day1.txt");
         private static final List<Supplier<Result>> store = List.of(DayOne::PartOne, DayOne::PartTwo);
@@ -29,11 +33,20 @@ public final class Solution {
         }
     }
 
-    public record Result(List<Integer> input, boolean success) {}
+    public record Result(List<Integer> input, boolean success) {
+    }
 
+    // Would not have figured this out without https://stackoverflow.com/a/46613809/205930
+    // Who knew reading files in the resource folder was so complicated?
     private static List<Integer> getInput(String path) {
-        try (var lines = Files.lines(Path.of(Solution.class.getClassLoader().getResource("input" + "/day1.txt").getPath()))) {
-            return lines
+        try (var stream = Solution.class.getClassLoader().getResourceAsStream("input" + "/" + path)) {
+            if (stream == null) {
+                return List.of();
+            }
+            var reader = new InputStreamReader(stream);
+            var br = new BufferedReader(reader);
+            return br.lines()
+                    .filter((l) -> !l.isBlank())
                     .map(Integer::parseInt)
                     .toList();
         } catch (IOException e) {
