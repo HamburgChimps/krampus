@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.function.Supplier;
 
@@ -22,31 +23,34 @@ public final class Solution {
         private static final List<Supplier<Result>> store = List.of(DayOne::PartOne, DayOne::PartTwo);
 
         private static Result PartOne() {
-            var inventories = new ArrayList<List<Integer>>();
-            var currentInventoryIdx = 0;
+            var answer = input
+                    .stream()
+                    .reduce(new ArrayList<List<Integer>>(List.of(new ArrayList<>())), (acc, nextLine) -> {
+                        if (nextLine.isEmpty()) {
+                            acc.add(new ArrayList<>());
+                        } else {
+                            acc.get(acc.size() - 1).add(Integer.parseInt(nextLine));
+                        }
 
-            inventories.add(currentInventoryIdx, new ArrayList<>());
-
-            for (String line: input) {
-                if (line.isEmpty()) {
-                    inventories.add(++currentInventoryIdx, new ArrayList<>());
-                    continue;
-                }
-
-                inventories
-                        .get(currentInventoryIdx)
-                        .add(Integer.parseInt(line));
-            }
-
-            return new Result(input, inventories, true);
+                        return acc;
+                    }, (acc1, acc2) -> {
+                        acc1.addAll(acc2);
+                        return acc1;
+                    })
+                    .stream()
+                    .map((inventory) -> inventory.stream().mapToInt(Integer::intValue).sum())
+                    .sorted(Collections.reverseOrder())
+                    .toList()
+                    .get(0);
+            return new Result(answer);
         }
 
         private static Result PartTwo() {
-            return new Result(input, List.of(),true);
+            return new Result(-1);
         }
     }
 
-    public record Result(List<String> input, List<List<Integer>> output, boolean success) {
+    public record Result(int answer) {
     }
 
     // Would not have figured this out without https://stackoverflow.com/a/46613809/205930
