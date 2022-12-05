@@ -63,7 +63,8 @@ public final class Solution {
             var reader = new InputStreamReader(stream);
             var br = new BufferedReader(reader);
 
-            return br.lines()
+            return br
+                    .lines()
                     .toList();
         } catch (IOException e) {
             throw new RuntimeException(e);
