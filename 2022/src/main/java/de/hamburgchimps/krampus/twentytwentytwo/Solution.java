@@ -21,32 +21,35 @@ public final class Solution {
     public static final class DayOne {
         private static final List<String> input = getInput("day1.txt");
         private static final List<Supplier<Result>> store = List.of(DayOne::PartOne, DayOne::PartTwo);
+        private static final List<Integer> listOfSums = input
+                .stream()
+                .reduce(new ArrayList<List<Integer>>(List.of(new ArrayList<>())), (acc, nextLine) -> {
+                    if (nextLine.isEmpty()) {
+                        acc.add(new ArrayList<>());
+                    } else {
+                        acc.get(acc.size() - 1).add(Integer.parseInt(nextLine));
+                    }
+
+                    return acc;
+                }, (acc1, acc2) -> {
+                    acc1.addAll(acc2);
+                    return acc1;
+                })
+                .stream()
+                .map((inventory) -> inventory.stream().mapToInt(Integer::intValue).sum())
+                .sorted(Collections.reverseOrder())
+                .toList();
 
         private static Result PartOne() {
-            var answer = input
-                    .stream()
-                    .reduce(new ArrayList<List<Integer>>(List.of(new ArrayList<>())), (acc, nextLine) -> {
-                        if (nextLine.isEmpty()) {
-                            acc.add(new ArrayList<>());
-                        } else {
-                            acc.get(acc.size() - 1).add(Integer.parseInt(nextLine));
-                        }
-
-                        return acc;
-                    }, (acc1, acc2) -> {
-                        acc1.addAll(acc2);
-                        return acc1;
-                    })
-                    .stream()
-                    .map((inventory) -> inventory.stream().mapToInt(Integer::intValue).sum())
-                    .sorted(Collections.reverseOrder())
-                    .toList()
-                    .get(0);
-            return new Result(answer);
+            return new Result(listOfSums.get(0));
         }
 
         private static Result PartTwo() {
-            return new Result(-1);
+            return new Result(listOfSums
+                    .stream()
+                    .limit(3)
+                    .mapToInt(Integer::intValue)
+                    .sum());
         }
     }
 

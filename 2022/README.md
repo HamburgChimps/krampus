@@ -10,9 +10,9 @@ For example, to execute the solution for part 2 of day 5, you would make a GET t
 
 ## Status
 
-- [ ] Day 1
+- [x] Day 1
     - [x] Part 1
-    - [ ] Part 2
+    - [x] Part 2
 - [ ] Day 2
     - [ ] Part 1
     - [ ] Part 2
