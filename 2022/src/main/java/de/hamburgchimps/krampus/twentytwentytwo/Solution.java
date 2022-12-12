@@ -1,15 +1,18 @@
 package de.hamburgchimps.krampus.twentytwentytwo;
 
+import org.jboss.resteasy.reactive.common.NotImplementedYet;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.function.Supplier;
 
 public final class Solution {
-    private static final List<List<Supplier<Result>>> store = List.of(DayOne.store);
+    private static final List<List<Supplier<Result>>> store = List.of(DayOne.store, DayTwo.store);
 
     public static Result execute(int day, int part) {
         return store
@@ -50,6 +53,42 @@ public final class Solution {
                     .limit(3)
                     .mapToInt(Integer::intValue)
                     .sum());
+        }
+    }
+
+    public static final class DayTwo {
+        private static final List<String> input = getInput("day2.txt");
+        private static final List<Supplier<Result>> store = List.of(DayTwo::PartOne, DayTwo::PartTwo);
+
+        private enum Move {
+            Rock(List.of("A","X")),
+            Paper(List.of("B","Y")),
+            Scissors(List.of("C", "Z"));
+
+            private static Move byRepresentation(String representation) {
+                return Arrays
+                        .stream(values())
+                        .filter((m) -> m
+                                .representations
+                                .contains(representation)).findFirst().get();
+            }
+            private final List<String> representations;
+
+            Move(List<String> representations) {
+                this.representations = representations;
+            }
+        }
+
+        private static Result PartOne() {
+            var stuffies = input.stream().map((line) -> Arrays
+                    .stream(line.split(" "))
+                    .map(Move::byRepresentation).toList()).toList();
+
+            throw new NotImplementedYet();
+        }
+
+        private static Result PartTwo() {
+            throw new NotImplementedYet();
         }
     }
 
