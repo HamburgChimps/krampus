@@ -61,8 +61,8 @@ public final class Solution {
         private static final List<Supplier<Result>> store = List.of(DayTwo::PartOne, DayTwo::PartTwo);
 
         private enum Move {
-            Rock(List.of("A","X")),
-            Paper(List.of("B","Y")),
+            Rock(List.of("A", "X")),
+            Paper(List.of("B", "Y")),
             Scissors(List.of("C", "Z"));
 
             private static Move byRepresentation(String representation) {
